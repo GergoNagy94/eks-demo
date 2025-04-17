@@ -42,3 +42,40 @@ module "vpc" {
     "kubernetes.io/role/internal-elb"             = "1"
   }
 }
+
+resource "aws_vpc" "gergo-eks-vpc" {
+  cidr_block       = var.vpc_cidr
+  instance_tenancy = "default"
+
+  tags = {
+    Name = "gergo-eks-vpc"
+  }
+}
+
+resource "aws_internet_gateway" "gergo-igw" {
+  vpc_id = aws_vpc.gergo-eks-vpc.id
+
+  tags = {
+    Name = "gergo-igw"
+  }
+}
+
+resource "aws_subnet" "priv-1" {
+  vpc_id     = aws_vpc.gergo-eks-vpc.id
+  cidr_block = "10.0.1.0/24"
+
+  tags = {
+    Name = "priv-1"
+  }
+}
+
+resource "aws_nat_gateway" "gergo-single-natgw" {
+  allocation_id = aws_eip.example.id
+  subnet_id     = aws_subnet.priv-1.id
+
+  tags = {
+    Name = "gergo-single-natgw"
+  }
+
+  depends_on = [aws_internet_gateway.example]
+}
