@@ -2,7 +2,7 @@ resource "aws_route_table" "gergo_private_rt" {
   vpc_id = aws_vpc.gergo_aws_vpc.id
 
   route {
-    cidr_block = "0.0.0.0/19"
+    cidr_block = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.gergo_nat.id
   }
 
@@ -15,8 +15,8 @@ resource "aws_route_table" "gergo_public_rt" {
   vpc_id = aws_vpc.gergo_aws_vpc.id
 
   route {
-    cidr_block = "0.0.0.0/19"
-    nat_gateway_id = aws_internet_gateway.gergo_igw.id
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.gergo_igw.id
   }
 
   tags = {

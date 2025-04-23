@@ -9,14 +9,14 @@ data "aws_iam_policy_document" "aws_lbc" {
 
       actions = [
         "sts:AssumeRole",
-        "sts:TagsSession"
+        "sts:TagSession"
       ]
     }
 }
 
 resource "aws_iam_role" "aws_lbc" {
   name = "${aws_eks_cluster.eks.name}_aws_lbc"
-  assume_role_policy = data.aws_iam_role_policy_document.aws_lbc.json
+  assume_role_policy = data.aws_iam_policy_document.aws_lbc.json
 }
 
 resource "aws_iam_policy" "aws_lbc" {

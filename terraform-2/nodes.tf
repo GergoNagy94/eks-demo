@@ -3,13 +3,13 @@ resource "aws_iam_role" "nodes" {
 
   assume_role_policy = <<POLICY
 {
-  "Version": "2012-10-17"
+  "Version": "2012-10-17",
   "Statement": [
     {
       "Effect": "Allow",
       "Action": "sts:AssumeRole",
       "Principal": {
-        "Service": "ec2.amazon.com"
+        "Service": "ec2.amazonaws.com"
       }
     }    
   ]
@@ -47,9 +47,9 @@ resource "aws_eks_node_group" "general" {
   instance_types = ["t3.large"]
 
   scaling_config {
-    desired_size = 1
+    desired_size = 2
     max_size = 3
-    min_size = 0
+    min_size = 1
   }
 
   update_config {

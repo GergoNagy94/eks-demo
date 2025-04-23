@@ -1,7 +1,7 @@
 resource "aws_iam_role" "cluster_autoscaler" {
   name = "${aws_eks_cluster.eks.name}_cluster_autoscaler"
 
-  assume_role_policy = jsondecode({
+  assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
         {
@@ -21,7 +21,7 @@ resource "aws_iam_role" "cluster_autoscaler" {
 resource "aws_iam_policy" "cluster_autoscaler" {
   name = "${aws_eks_cluster.eks.name}_cluster_autoscaler"
 
-  policy = jsondecode({
+  policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
         {
@@ -87,5 +87,5 @@ resource "helm_release" "cluster_autoscaler" {
     value = "eu-central-1"
   }
 
-  depends_on = [ helm_release.metrics_server ]
+  depends_on = [ helm_release.metrics-server ]
 }

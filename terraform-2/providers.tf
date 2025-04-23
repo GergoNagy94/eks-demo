@@ -2,6 +2,11 @@ provider "aws" {
   region = local.region
 }
 
+provider "kubernetes" {
+  config_path = "~/.kube/config"
+}
+
+
 terraform {
   required_version = ">= 1.0"
 

@@ -5,10 +5,10 @@ resource "aws_iam_role" "eks_admin" {
 
   assume_role_policy = <<POLICY
 {
-  "Version": "2012-10-17"
+  "Version": "2012-10-17",
   "Statement": [
     {
-      "Effect": "Allow"
+      "Effect": "Allow",
       "Action": "sts:AssumeRole",
       "Principal": {
         "AWS": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
@@ -24,19 +24,19 @@ resource "aws_iam_policy" "eks_admin" {
 
   policy = <<POLICY
 {
-    "Version": "2012-10-17"
+    "Version": "2012-10-17",
     "Statement": [
         {
-            "Effect": "Allow"
+            "Effect": "Allow",
             "Action": [
                 "eks:*"
             ],
             "Resource": "*"
         },
         {
-            "Effect": "Allow"
+            "Effect": "Allow",
             "Action": "iam:PassRole",
-            "Resource": "*"
+            "Resource": "*",
             "Condition": {
                 "StringEquals": {
                     "iam:PassedToService": "eks.amazonaws.com"
@@ -62,10 +62,10 @@ resource "aws_iam_policy" "eks_assume_admin" {
 
   policy = <<POLICY
 {
-    "Version": "2012-10-17"
+    "Version": "2012-10-17",
     "Statement": [
         {
-            "Effect": "Allow"
+            "Effect": "Allow",
             "Action": [
                 "sts:AssumeRole"
             ],
@@ -84,5 +84,5 @@ resource "aws_iam_user_policy_attachment" "manager" {
 resource "aws_eks_access_entry" "manager" {
   cluster_name = aws_eks_cluster.eks.name
   principal_arn = aws_iam_role.eks_admin.arn
-  kubernetes_groups = ["gergo-admin"]
+  kubernetes_groups = ["gergo_admin"]
 }
