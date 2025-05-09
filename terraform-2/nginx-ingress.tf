@@ -6,7 +6,7 @@ resource "helm_release" "external_nginx" {
   namespace        = "ingress"
   create_namespace = true
   version          = "4.10.1"
-  timeout = 600
+  timeout = 300
 
   values = [file("${path.module}/values/nginx-ingress.yaml")]
 
