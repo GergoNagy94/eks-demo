@@ -20,7 +20,7 @@ resource "terraform_data" "push_image_server" {
 
   provisioner "local-exec" {
     command = <<EOT
-      docker tag deck_builder_server ${aws_ecr_repository.deck_builder_server.repository_url}:v1
+      docker tag deck_builder_server:v1 ${aws_ecr_repository.deck_builder_server.repository_url}:v1
       docker push ${aws_ecr_repository.deck_builder_server.repository_url}:v1
     EOT
   }
@@ -40,7 +40,7 @@ resource "terraform_data" "push_image_client" {
 
   provisioner "local-exec" {
     command = <<EOT
-      docker tag deck_builder_client ${aws_ecr_repository.deck_builder_client.repository_url}:v1
+      docker tag deck_builder_client:v1 ${aws_ecr_repository.deck_builder_client.repository_url}:v1
       docker push ${aws_ecr_repository.deck_builder_client.repository_url}:v1
     EOT
   }

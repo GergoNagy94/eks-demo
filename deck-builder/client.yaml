@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deck-builder-client
+  namespace: deck-builder
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deck-builder-client
+  template:
+    metadata:
+      labels:
+        app: deck-builder-client
+    spec:
+      containers:
+      - name: deck-builder-client
+        image: "940482431327.dkr.ecr.eu-central-1.amazonaws.com/deck_builder_client:v1"
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - name: http
+          containerPort: 8080

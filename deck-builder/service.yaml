@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: deck-builder-service
+  namespace: deck-builder
+spec:
+  type: ClusterIP  
+  selector:
+    app: deck-builder-service
+  ports:
+  - port: 8080
+    targetPort: http

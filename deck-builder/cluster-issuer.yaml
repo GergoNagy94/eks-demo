@@ -1,0 +1,16 @@
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: http-01-production
+  namespace: deck-builder
+spec:
+  acme:
+    email: gergodevops@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: deck-builder-tls
+    solvers:
+    - http01:
+        ingress:
+          class: external-nginx
