@@ -7,6 +7,8 @@ resource "aws_ecr_repository" "deck_builder_client" {
 }
 
 resource "terraform_data" "ecr_login_server" {
+  depends_on = [ aws.terraform_data.push_image_client ]
+  
   provisioner "local-exec" {
     command = <<EOT
       aws ecr get-login-password --region ${local.region} | \
