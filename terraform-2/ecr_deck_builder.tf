@@ -30,7 +30,7 @@ resource "terraform_data" "ecr_login_client" {
   provisioner "local-exec" {
     command = <<EOT
       aws ecr get-login-password --region ${local.region} | \
-      docker login --username AWS --password-stdin ${aws_ecr_repository.deck_builder_server.repository_url}
+      docker login --username AWS --password-stdin ${aws_ecr_repository.deck_builder_client.repository_url}
     EOT
   }
 }
@@ -45,3 +45,4 @@ resource "terraform_data" "push_image_client" {
     EOT
   }
 }
+
