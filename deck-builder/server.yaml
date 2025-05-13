@@ -14,6 +14,7 @@ spec:
       labels:
         app: deck-builder-server
     spec:
+      serviceAccountName: deck-builder-sa
       containers:
       - name: deck-builder-server
         image: "940482431327.dkr.ecr.eu-central-1.amazonaws.com/deck_builder_server:v1"
