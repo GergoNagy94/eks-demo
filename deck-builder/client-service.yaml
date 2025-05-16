@@ -7,7 +7,7 @@ metadata:
 spec:
   type: ClusterIP  
   selector:
-    app: deck-builder-service
+    app: deck-builder-client
   ports:
-  - port: 8080
+  - port: 4000
     targetPort: http

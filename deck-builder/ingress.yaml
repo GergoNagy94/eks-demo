@@ -4,7 +4,7 @@ metadata:
   name: deck-builder-ingress
   namespace: deck-builder
   annotations:
-    cert-manager.io/cluster-issuer: http-01-production
+    cert-manager.io/issuer: http-01-production
 spec:
   ingressClassName: external-nginx
   rules:
@@ -17,7 +17,7 @@ spec:
           service:
             name: deck-builder-service
             port: 
-              number: 8080
+              number: 4000
   tls: 
   - hosts:
     - gergodevops.deckbuilder.com
